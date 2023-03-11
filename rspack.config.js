@@ -1,6 +1,4 @@
 const path = require('path');
-const HtmlPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { RelativeCiAgentWebpackPlugin } = require('@relative-ci/agent');
 
 const SRC_DIR = path.resolve(__dirname, 'src');
@@ -9,6 +7,14 @@ const OUT_DIR = path.resolve(__dirname, 'dist');
 module.exports = {
   context: SRC_DIR,
   entry: './index.jsx',
+  builtins: {
+    html: [
+      {
+        template: 'index.html',
+        filename: 'index.html',
+      },
+    ],
+  },
   output: {
     path: OUT_DIR,
     filename: '[name].bundle.[contenthash].js',
@@ -22,33 +28,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
-        use: 'babel-loader',
-        include: [SRC_DIR],
-      },
-      {
-        test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-        ],
-      },
-      {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
       },
     ],
   },
   plugins: [
-    new HtmlPlugin({
-      title: 'Example webpack code splitting',
-      template: './index.html',
-      publicPath: '/',
-    }),
-    new MiniCssExtractPlugin({
-      filename: '[name].bundle.[contenthash].css',
-      chunkFilename: '[name].chunk.[contenthash].css',
-    }),
     new RelativeCiAgentWebpackPlugin(),
   ],
   devServer: {

@@ -43,6 +43,9 @@ export const Repo = ({ repo, title: TitleComponent = DefaultTitle }) => (
             <Col flex={1}>
               Created: {formatRelative(new Date(repo.created_at), new Date())}
             </Col>
+            <Col flex={2}>
+              Created: {formatRelative(new Date(repo.created_at), new Date())}
+            </Col>
           </Row>
         </Col>
       </Row>
