@@ -4,7 +4,7 @@
     "config:base"
   ],
   "timezone": "Europe/Madrid",
-  "schedule": ["before 10pm on Sunday"],
+  "schedule": ["before 7am"],
   "automerge": true,
   "branchPrefix": "renovate-"
 }
